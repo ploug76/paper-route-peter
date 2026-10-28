@@ -183,7 +183,7 @@ function draw(){g.fillStyle='#3c9c4c';g.fillRect(0,0,W,H);
  g.fillStyle='#4a4a52';g.fillRect(W/2-RX(),0,RX()*2,H);g.fillStyle='#f8d838';for(let k=Math.floor(dist/60)-2;k<dist/60+H/(60*S)+2;k++){g.fillRect(W/2-2*S,sy(k*60),4*S,26*S)}
  if(state=='title'&&lots.length==0){for(let i=0;i<NL*2;i++)lots.push({side:i%2?1:-1,wy:200+(i>>1)*LOT+(i%2?LOT/2:0),sub:R()<.7,col:HCOL[i%6]})}
  if(state=='title'){if(dist>NL*LOT-600)dist=0;const TL=['Drag to steer · tap side to toss','Hit ★ houses · mailbox = bonus','Miss a subscriber? They cancel!','Dodge cars, dogs & skaters'];
-  if(W>H){const U=DPR,T=48*U,ph=Math.min(214*U,H*.7-T-12*S);panel(T,ph,'#2c8c4c');const k=ph/(214*U);txt('PAPER ROUTE',W/2,T+30*U*k,30*U,'#f8d838','#000');txt('PETER',W/2,T+64*U*k,36*U,'#fff','#000');
+  if(W>H){const U=DPR,T=62*U,/* tap48: clear of the 48px dock */ph=Math.min(214*U,H*.7-T-12*S);panel(T,ph,'#2c8c4c');const k=ph/(214*U);txt('PAPER ROUTE',W/2,T+30*U*k,30*U,'#f8d838','#000');txt('PETER',W/2,T+64*U*k,36*U,'#fff','#000');
    TL.forEach((s,i)=>txt(s,W/2,T+(100+i*22)*U*k,16*U,'#fff'));txt(`BEST ${best}`,W/2,T+194*U*k,16*U,'#f8d838');const cs=Math.min(140*U,ph-50*U);portraitCard(W*.06+24*U+cs/2,T+(ph-cs)/2-8*U,cs)}
   else{panel(H*.1,280*S,'#2c8c4c');txt('PAPER ROUTE',W/2,H*.1+48*S,38*S,'#f8d838','#000');txt('PETER',W/2,H*.1+96*S,46*S,'#fff','#000');
   TL.forEach((s,i)=>txt(s,W/2,H*.1+(140+i*24)*S,14*S,'#fff'));txt(`BEST ${best}`,W/2,H*.1+252*S,15*S,'#f8d838');portraitCard(W/2,H*.1+292*S,104*S)}px=W/2+Math.sin(t*.02)*40*S;peter();if(t%60<40)txt('TAP TO START',W/2,H*.86,24*S,'#fff','#000');return}
@@ -464,4 +464,21 @@ function lock(){if(locked)return;locked=true;try{localStorage.setItem(TK,Math.ma
  setInterval(()=>{try{(window.__ACS||[]).forEach(a=>{if(a.state==='running')a.suspend()})}catch(e){}},1000)}
 lb.addEventListener('click',e=>{e.preventDefault();try{if(window.PALB){(PALB.postNow?PALB.postNow():PALB.show())}}catch(x){}});if(!window.PALB&&!document.getElementById('palbOv'))setTimeout(()=>{if(!window.PALB)lb.style.display='none'},1500);
 setInterval(()=>{const now=performance.now(),dt=Math.min(1,(now-last)/1000);last=now;if(locked)return;if(!document.hidden&&!onTitle()){used+=dt;if(now-saved>3000){saved=now;try{localStorage.setItem(TK,used)}catch(e){}}}if(when()||used>=C.secs)lock()},250);
-window.__sampleLock={lock,get locked(){return locked},get used(){return used},C}})()</script><!--/share--></body></html>
+window.__sampleLock={lock,get locked(){return locked},get used(){return used},C}})()</script><!--/share--><style id="tap48">/* Peter 10/28: button/text size round - tap targets 48px, labels 16px */
+#dock .dk{min-height:48px!important;height:48px!important;min-width:48px!important;font-size:16px!important;line-height:44px!important;border-radius:24px!important;padding:0 8px!important}
+#dock .dk.ic{padding:0!important}
+#dock .dk.ic,#dock .dk.ic~#lbBtn{min-width:48px!important;width:48px!important}
+#dockHint{font-size:16px!important;padding-right:58px!important;min-height:54px}
+#dockHintX{width:48px!important;height:48px!important;margin-top:-24px!important;border-radius:24px!important;font-size:18px!important}
+#smpBuy{height:48px!important;line-height:44px!important;font-size:16px!important;border-radius:24px!important}
+#smpLock .b{min-height:48px!important}
+#smpLock .lnk{display:flex!important;align-items:center;justify-content:center;min-height:48px!important;font-size:16px!important;margin-top:4px!important}
+#palbX{width:48px!important;height:48px!important;border-radius:24px!important}
+#palbCard h2{margin-left:56px!important;margin-right:56px!important}
+#palbCard .sub,#palbCard .note,#palbCard .err{font-size:16px!important}
+#palbCard .src{font-size:14px!important}
+#palbCard .b{min-height:48px!important}
+#palbTabs button{min-height:48px!important;font-size:16px!important}
+#palbList li{min-height:30px;height:auto!important;font-size:16px!important}
+</style>
+</body></html>
