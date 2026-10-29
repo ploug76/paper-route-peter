@@ -492,4 +492,17 @@ window.__sampleLock={lock,get locked(){return locked},get used(){return used},C}
 #palbTabs button{min-height:48px!important;font-size:16px!important}
 #palbList li{min-height:30px;height:auto!important;font-size:16px!important}
 </style>
+<!-- gamepad:start -->
+<script src="gamepad.js?v=1"></script>
+<script>
+GamepadSupport.init({
+ keys:{left:'ArrowLeft',right:'ArrowRight',up:'ArrowUp',down:'ArrowDown',a:'KeyX',rb:'KeyX',x:'KeyZ',lb:'KeyZ',b:'KeyZ',start:'KeyP',back:function(p){if(p)document.getElementById('mute').click()}},
+ menuKeys:{a:'Enter',x:'Enter',start:'Enter'},
+ noRepeat:['a','b','x','y','lb','rb'],
+ ignoreSel:'#dock,#mute,#pause,#inst,#ios,.tb,#bar',
+ menu:function(){return !!document.querySelector('#palbOv.on,#smpLock.on')||(state!=='play'&&state!=='inter');},
+ hint:{text:'🎮 Controller: stick to steer (up faster, down slower) · A toss right · X toss left · Start pause',when:function(){return state==='title'&&!document.querySelector('#palbOv.on')}}
+});
+</script>
+<!-- gamepad:end -->
 </body></html>
